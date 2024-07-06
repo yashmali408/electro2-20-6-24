@@ -17,7 +17,9 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="/index2.html"><b>Admin</b>LTE</a>
+  @isset($app_logo)
+      <img width='200' src="{{ $app_logo }}" alt="App Logo" />
+    @endisset
   </div>
   <!-- /.login-logo -->
   <div class="card">

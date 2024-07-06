@@ -4,7 +4,13 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerAuthController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UnitController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\SystemController;
+
+
 use App\Http\Middleware\AdminAuth;
 
 /*   Frontend Routes     */
@@ -64,10 +70,7 @@ Route::get('/contact-v1',function(){
 /*   Backend/Admin Routes     */
 
 Route::prefix('admin')->middleware(AdminAuth::class)->group(function () { // /admin/login
-    Route::get('/', function () {
-        // Matches The "/admin/login" URL
-        return view('admin.login'); //login.blade.php
-    })->withoutMiddleware([AdminAuth::class]);
+    Route::get('/', [SystemController::class,'login'])->withoutMiddleware([AdminAuth::class]);
     Route::get('/login', function () {
         // Matches The "/admin/login" URL
         return view('admin.login'); //login.blade.php
@@ -75,7 +78,12 @@ Route::prefix('admin')->middleware(AdminAuth::class)->group(function () { // /ad
     
     Route::get('/logout',[AuthController::class,'logout']);
     Route::get('/dashboard', [AuthController::class,'dashboard'])->name('admin_dashboard');
+    
+    
+    Route::resource('products', ProductController::class);
+    Route::resource('unit', UnitController::class);
     Route::resource('category', CategoryController::class);
+    Route::resource('brands', BrandController::class);
     
     /* Only for practice */
     

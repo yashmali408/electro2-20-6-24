@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('new_table_name', function (Blueprint $table) {
+        Schema::create('brands', function (Blueprint $table) {
             $table->id();
+            $table->string('brand_name')->nullable()->unique();
+            $table->string('brand_logo')->nullable();
+            $table->string('seo_meta_title')->nullable();
+            $table->text('seo_meta_desc')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('new_table_name');
+        Schema::dropIfExists('brands');
     }
 };

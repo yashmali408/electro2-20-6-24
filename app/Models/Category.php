@@ -16,6 +16,8 @@ class Category extends Model
         // Add other attributes that you want to be mass assignable
     ];
 
+    protected $primaryKey = 'category_id';
+
     //2. Constructor
 
     //3. method
