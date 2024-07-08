@@ -15,11 +15,11 @@
   <link rel="stylesheet" href="/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition login-page">
-<div class="login-box">
+<div class="login-box"> 
   <div class="login-logo">
   @isset($app_logo)
-      <img width='200' src="{{ $app_logo }}" alt="App Logo" />
-    @endisset
+  <img width="120" src="{{$appData['app_logo']}}" />
+      @endisset
   </div>
   <!-- /.login-logo -->
   <div class="card">

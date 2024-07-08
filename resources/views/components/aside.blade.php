@@ -3,8 +3,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{route('admin_dashboard')}}" class="brand-link">
-        <span class="d-blockbrand-text font-weight-light text-center">
-            <img width="100" src="{{$appData['app_logo']}}"/>
+        <span class="d-block brand-text font-weight-light text-center">
+            <img width="120" src="{{$appData['app_logo']}}" />
         </span>
     </a>
 

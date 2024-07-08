@@ -67,6 +67,6 @@ class SystemController extends Controller
         //I can write all login inside controller
         $app_logo = $system->where('meta_name', 'app_logo')->first()->meta_value;
        
-        return view('admin.login',['app_logo'=>'https://icon2.cleanpng.com/20180528/jh/kisspng-arcade-fire-amazon-com-amazon-echo-logo-amazon-5b0bbebde299d5.8644006315274963819282.jpg']);
+        return view('admin.login',['app_logo'=>'https://c0.klipartz.com/pngpicture/381/167/gratis-png-amazonas.png']);
     }
 }

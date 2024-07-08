@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Unit;
 
 class ProductController extends Controller
 {
@@ -22,13 +23,18 @@ class ProductController extends Controller
      */
     public function create()
     {
-        // Get Brands
+        // Fetch the data for units, brands, and categories
+        $units = Unit::all();
         $brands = Brand::all();
-        // Get Category
         $categories = Category::all();
-        return view('admin.products.create',['brands'=>$brands,'categories'=>$categories]);
+    
+        // Pass the data to the view
+        return view('admin.products.create', [
+            'units' => $units,
+            'brands' => $brands,
+            'categories' => $categories
+        ]);
     }
-
     /**
      * Store a newly created resource in storage.
      */

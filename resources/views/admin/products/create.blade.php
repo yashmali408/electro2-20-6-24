@@ -26,7 +26,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="GET" action="" enctype="multipart/form-data">
+                        <form method="post" action="" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -41,10 +41,10 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="unit">Unit</label>
-                                            <select name="unit" id="unit" class="select2" style="width: 100%;">
-                                                <option selected>KG</option>
-                                                <option>Pices</option>
-                                                <option>Ltr</option>
+                                            <select name="unit_id" id="unit_id" class="select2" style="width: 100%;">
+                                            @foreach($units as $unit)
+                                                    <option> value=""{{$unit->unit_name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>  
                                     </div>
@@ -71,19 +71,19 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="mrp">MRP</label>
-                                            <input id="mrp" name="mrp" type="number" class="form-control"/>
+                                            <input id="mrp" name="mrp" type="number" class="form-control"main="0"/>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="sell_price">Sell Price</label>
-                                            <input id="sell_price" name="sell_price" type="number" class="form-control"/>
+                                            <input id="sell_price" name="sell_price" type="number" class="form-control"main="0"/>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="qty_available">Available Quantity</label>
-                                            <input id="qty_available" name="qty_available" type="number" class="form-control"/>
+                                            <input id="qty_available" name="qty_available" type="number" class="form-control"main="1"/>
                                         </div>
                                     </div>
                                 </div>
