@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6 a_tbdr">
-                    <h1 class="m-0">Add New Product</h1>
+                    <h1 class="m-0">Edit Product</h1>
                 </div>
                 <!-- <div class="col-sm-6 a_tbdr text-right">
                     <a href="{{route('category.create')}}" class="btn btn-primary">Add New Category</a>
@@ -31,8 +31,9 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="POST" action="{{route('products.store')}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('products.update',['product'=>1])}}" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             
                             <div class="card-body">
                                 <div class="form-group">
@@ -54,9 +55,7 @@
                                         <div class="form-group">
                                             <label for="unit_id">Unit</label>
                                             <select required name="unit_id" id="unit_id" class="select2" style="width: 100%;">
-                                                @foreach($units as $unit)
-                                                    <option value="{{$unit->id}}">{{$unit->unit_name}}</option>
-                                                @endforeach
+                                               
                                             </select>
                                         </div> 
                                         @error('unit_id')
@@ -67,9 +66,7 @@
                                         <div class="form-group">
                                             <label>Brand</label>
                                             <select required name="brand_id" class="select2" style="width: 100%;">
-                                                @foreach($brands as $brand)
-                                                    <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
-                                                @endforeach
+                                               
                                             </select>
                                         </div> 
                                         @error('brand_id')
@@ -80,9 +77,7 @@
                                         <div class="form-group">
                                             <label>Category</label>
                                             <select required name="category_id" class="select2" style="width: 100%;">
-                                                @foreach($categories as $category)
-                                                    <option value="{{$category->category_id}}">{{$category->category_name}}</option>
-                                                @endforeach
+                                                
                                             </select>
                                         </div>
                                         @error('category_id')
@@ -153,7 +148,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </form>
                     </div>

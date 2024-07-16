@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('systems', function (Blueprint $table) {
             $table->id();
-            $table->string('meta_name')->nullable()->unique();
-            $table->string('meta_value')->nullable();
+            $table->string('meta_name');
+            $table->string('meta_value');
             $table->timestamps();
         });
     }

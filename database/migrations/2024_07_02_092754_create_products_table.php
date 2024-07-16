@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('mrp');
             $table->string('sell_price');
             $table->string('qty_available');
+            $table->string('prod_thumbnail_img')->nullable();
+            $table->string('prod_main_img')->nullable();
             $table->timestamps();
         });
     }
