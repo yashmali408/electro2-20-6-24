@@ -1,3 +1,4 @@
+
 <x-layout title=""><!-- I will pass data to the layout compoent using prop/ properties -->
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -121,14 +122,14 @@
                                     <label for="prod_thumbnail_img">Product Thumbnail (212 × 200)</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" required name="prod_thumbnail_img" class="custom-file-input" id="prod_thumbnail_img">
+                                            <input type="file" required name="prod_thumbnail_img" class="custom-file-input" id="prod_thumbnail_img" onchange="previewImage('thumbnail_preview', this)">
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                         <div class="input-group-append">
                                             <span class="input-group-text">Upload</span>
                                         </div>
                                     </div>
-                                    <img id="thumbnailPreview" src="" alt="Thumbnail Preview" style="max-width: 212px; max-height: 200px; display: none; margin-top: 10px;">
+                                    <img id="thumbnail_preview" src="" />
                                 </div>
                                 @error('prod_thumbnail_img')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -137,14 +138,14 @@
                                     <label for="prod_main_img">Product Main Image (720 × 660)</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" required name="prod_main_img" class="custom-file-input" id="prod_main_img">
+                                            <input type="file" required name="prod_main_img" class="custom-file-input" id="prod_main_img" onchange="previewImage('main_preview', this)">
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                         <div class="input-group-append">
                                             <span class="input-group-text">Upload</span>
                                         </div>
                                     </div>
-                                    <img id="mainImagePreview" src="" alt="Main Image Preview" style="max-width: 720px; max-height: 660px; display: none; margin-top: 10px;">
+                                    <img id="main_preview" src="" />
                                 </div>
                                 @error('prod_main_img')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -162,14 +163,22 @@
         </div>
     </section>
     <script>
-        function previewImage(event, previewId) {
-            var reader = new FileReader();
-            reader.onload = function(){
-                var output = document.getElementById(previewId);
-                output.src = reader.result;
-                output.style.display = 'block';
-            };
-            reader.readAsDataURL(event.target.files[0]);
+        function previewImage(previewId, input) {
+            const preview = document.getElementById(previewId);
+            const file = input.files[0];
+            const reader = new FileReader();
+
+            reader.onloadend = function() {
+                preview.src = reader.result;
+                preview.style.display = 'block';
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+                preview.style.display = 'none';
+            }
         }
     </script>
 </x-layout>
