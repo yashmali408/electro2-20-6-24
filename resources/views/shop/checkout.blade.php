@@ -1,6 +1,7 @@
-@extends('layouts.app')
 
-@section('main')
+@extends('layouts.common')
+
+@section('common_content')
 <!-- ========== MAIN CONTENT ========== -->
 <main id="content" role="main" class="checkout-page">
     <!-- breadcrumb -->
@@ -1653,5 +1654,4 @@
     </div>
 </main>
 <!-- ========== END MAIN CONTENT ========== -->
-
 @endsection

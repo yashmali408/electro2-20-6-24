@@ -1,34 +1,46 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductFilterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
-use App\Http\Controllers\SystemController;
+use App\Http\Controllers\SystemInfoController;
 
 
 use App\Http\Middleware\AdminAuth;
 
 /*   Frontend Routes     */
 
-Route::get('/', function () {
-    return view('home');
-})->name('homeroute');
+Route::get('/', [HomeController::class,'home'])->name('homeroute');
 
 Route::post('/login',[AuthController::class,'login'])->name('login');
 
 
 Route::prefix('/shop')->group(function () {
+    Route::get('/shop-grid',[ProductFilterController::class,'filter'])->name('shop-grid');;
+    Route::get('/shop',function(){
+        return view('shop/shop'); //shop.blade.php
+    });
+    Route::get('/wishlist',function(){
+        return view('shop/wishlist'); //shop.blade.php
+    });
+
+    Route::get('/single-product-fullwidth',function(){
+        return view('shop/single-product-fullwidth'); //shop.blade.php
+    });
+
+
     Route::get('/cart',function(){
         return view('shop/cart');
     });
-    Route::get('/shop-grid',function(){
-        return view('shop/shop-grid'); //shop-grid.blade.php
-    });
+    
     Route::get('/my-account',function(){
         return view('shop/my-account'); //my-account.blade.php
     });
@@ -41,9 +53,7 @@ Route::prefix('/shop')->group(function () {
     Route::get('/compare',function(){
         return view('shop/compare'); //compare.blade.php
     });
-    Route::get('/shop',function(){
-        return view('shop/shop'); //shop.blade.php
-    });
+    
     Route::get('/checkout',function(){
         return view('shop/checkout'); //checkout.blade.php
     });
@@ -70,7 +80,7 @@ Route::get('/contact-v1',function(){
 /*   Backend/Admin Routes     */
 
 Route::prefix('admin')->middleware(AdminAuth::class)->group(function () { // /admin/login
-    Route::get('/', [SystemController::class,'login'])->withoutMiddleware([AdminAuth::class]);
+    Route::get('/', [SystemInfoController::class,'login'])->withoutMiddleware([AdminAuth::class]);
     Route::get('/login', function () {
         // Matches The "/admin/login" URL
         return view('admin.login'); //login.blade.php

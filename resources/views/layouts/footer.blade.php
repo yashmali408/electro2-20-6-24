@@ -1,3 +1,4 @@
+
 <footer>
     <!-- Footer-top-widget -->
     <div class="container d-none d-lg-block mb-3">
@@ -238,7 +239,7 @@
                 <div class="col-lg-5">
                     <div class="mb-6">
                         <a href="#" class="d-inline-block">
-                            <img width="200" src="{{$appData['app_logo']}}"/>
+                            <img width="250" src="{{$appData['app_logo']}}" />
                         </a>
                     </div>
                     <div class="mb-4">
@@ -263,25 +264,25 @@
                         <ul class="list-inline mb-0 opacity-7">
                             <li class="list-inline-item mr-0">
                                 <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle"
-                                    href="#">
+                                   target="_blank" href="{{$appData['social_fb_url']}}">
                                     <span class="fab fa-facebook-f btn-icon__inner"></span>
                                 </a>
                             </li>
                             <li class="list-inline-item mr-0">
                                 <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle"
-                                    href="#">
+                                   target="_blank" href="{{$appData['social_google_url']}}">
                                     <span class="fab fa-google btn-icon__inner"></span>
                                 </a>
                             </li>
                             <li class="list-inline-item mr-0">
                                 <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle"
-                                    href="#">
+                                   target="_blank" href="{{$appData['social_x_url']}}">
                                     <span class="fab fa-twitter btn-icon__inner"></span>
                                 </a>
                             </li>
                             <li class="list-inline-item mr-0">
                                 <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle"
-                                    href="#">
+                                   target="_blank" href="{{$appData['social_github_url']}}">
                                     <span class="fab fa-github btn-icon__inner"></span>
                                 </a>
                             </li>

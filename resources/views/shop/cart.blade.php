@@ -1,6 +1,7 @@
-@extends('layouts.app')
 
-@section('main')
+@extends('layouts.common')
+
+@section('common_content')
 <!-- ========== MAIN CONTENT ========== -->
 <main id="content" role="main" class="cart-page">
     <!-- breadcrumb -->

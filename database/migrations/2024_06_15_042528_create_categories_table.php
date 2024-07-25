@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -16,7 +17,8 @@ return new class extends Migration
             $table->string('category_name')->nullable()->unique();
             $table->string('description')->nullable();
             $table->string('picture')->nullable();
-            $table->string('perent_category')->nullable();
+            $table->string('parent_category_id')->nullable();
+            $table->string('/')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('categories'); 
     }
 };
