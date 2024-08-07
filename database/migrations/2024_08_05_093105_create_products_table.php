@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -13,7 +14,10 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique()->nullable(); // Add a slug field with a unique constraint
+            $table->string('sku')->unique()->nullable(); // Add a slug field with a unique constraint
             $table->string('product_name');
+            $table->string('product_id');
             $table->text('product_desc');
             $table->string('brand_id');
             $table->string('unit_id');
@@ -23,6 +27,7 @@ return new class extends Migration
             $table->string('qty_available');
             $table->string('prod_thumbnail_img')->nullable();
             $table->string('prod_main_img')->nullable();
+            $table->string('product_gallery_images')->nullable();
             $table->timestamps();
         });
     }
