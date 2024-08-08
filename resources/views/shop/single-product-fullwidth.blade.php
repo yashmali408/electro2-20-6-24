@@ -38,9 +38,11 @@ div.zoomContainer{
                         data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4"
                         data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4"
                         data-nav-for="#sliderSyncingThumb">
+                        @foreach($product_gallery_image_controllers as $product_gallery_image_controller)
                         <a href="#" class="js-slide gallery-viewer">
-                            <img id="zoom_10" class="img-fluid" src="/assets/img/720X660/img1.jpg" alt="Image Description">
+                            <img id="zoom_10" class="img-fluid "src="{{$product_gallery_image_controller->image_url}}"  alt="Image Description" data-zoom-image="{{$product_gallery_image_controller->image_url}}">
                         </a>
+                        @endforeach
                     </div>
                     
 
@@ -51,7 +53,7 @@ div.zoomContainer{
                         data-nav-for="#sliderSyncingNav">
                         @foreach($product_gallery_image_controllers as $product_gallery_image_controller)
                         <div class="js-slide" style="cursor: pointer;">
-                            <img class="img-fluid" src="{{$product_gallery_image_controller->image_url}}" alt="Image Description">
+                            <img class="img-fluid" width="100" src="{{$product_gallery_image_controller->image_url}}" alt="Image Description">
                         </div>
                         @endforeach()
                     </div>
@@ -98,10 +100,10 @@ div.zoomContainer{
                                 <del class="font-size-20 ml-2 text-gray-6">${{$product->mrp}}</del>
                             </div>
                         </div>
-                        <div class="border-top border-bottom py-3 mb-4">
+                       <!--  <div class="border-top border-bottom py-3 mb-4">
                             <div class="d-flex align-items-center">
                                 <h6 class="font-size-14 mb-0">Color</h6>
-                                <!-- Select -->
+                                
                                 <select class="js-select selectpicker dropdown-select ml-3"
                                     data-style="btn-sm bg-white font-weight-normal py-2 border">
                                     <option value="one" selected>White with Gold</option>
@@ -109,9 +111,9 @@ div.zoomContainer{
                                     <option value="three">Green</option>
                                     <option value="four">Blue</option>
                                 </select>
-                                <!-- End Select -->
+                               
                             </div>
-                        </div>
+                        </div> -->
                         <div class="d-md-flex align-items-end mb-3">
                             <div class="max-width-150 mb-4 mb-md-0">
                                 <h6 class="font-size-14">Quantity</h6>

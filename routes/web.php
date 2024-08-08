@@ -90,7 +90,7 @@ Route::prefix('admin')->middleware(AdminAuth::class)->group(function () { // /ad
         return view('admin.login'); //login.blade.php
     })->withoutMiddleware([AdminAuth::class]);
     
-    Route::get('/logout',[AuthController::class,'logout']);
+    Route::get('/logout/logout',[AuthController::class,'logout']);
     Route::get('/dashboard', [AuthController::class,'dashboard'])->name('admin_dashboard');
     
     
@@ -111,4 +111,5 @@ Route::prefix('admin')->middleware(AdminAuth::class)->group(function () { // /ad
 Route::prefix('customer')->group(function () { // /admin/login
     Route::post('/register', [CustomerAuthController::class,'register'])->name('customerRegister');
     Route::post('/login', [CustomerAuthController::class,'login'])->name('customerLogin');
+    Route::get('/logout', [CustomerAuthController::class,'logout']);
 });

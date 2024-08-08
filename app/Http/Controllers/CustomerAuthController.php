@@ -19,7 +19,7 @@ class CustomerAuthController extends Controller
     //
     public function register(Request $request){
         //dd($request->all());
-        $request->validate([
+       $request->validate([
                                 'email' => 'required|email|unique:users',
                                 'password'=>'required|min:8'
                            ]);
@@ -56,7 +56,7 @@ class CustomerAuthController extends Controller
 
     // public function method(Formal Argument)
     public function login(Request $request){
-
+        //dd($request->all());
         /* $request->validate([
             'email'=>'required|email:users',
             'password'=>'required|min:3|max:25'
@@ -69,18 +69,26 @@ class CustomerAuthController extends Controller
             if (Auth::attempt($credentials)) {
                 session(['firstname' => $user->name]);//Associative array ['key'=>'value']
                 session(['lastname' => $user->surname]);
-                return response()->json([
-                                            'success' => 'You have logged successfully.',
-                                            'data'=>[  
-                                                        'firstname'=>$user->name,
-                                                        'lastname'=>$user->surname
-                                                    ]
-                                        ]);
+                return back()->with('success','You have Logged in successfully.');
             }else{
-                return response()->json(['failed' => 'Invalid credentials'],403);
+                return back()->with('failed','Invalid Credentials.');
             }
         }else{
-            return response()->json(['failed' => 'Invalid credentials'],403);
+            return back()->with('failed','Invalid Credentials.');
         }
+    }
+
+    public function logout(Request $request){
+        // Log out the user
+        Auth::logout();
+
+        // Clear all session data if needed
+        // $request->session()->invalidate();
+
+        // Regenerate session token to prevent session fixation
+        // $request->session()->regenerateToken();
+
+        // Redirect to the login page with a success message
+        return redirect('/')->with('success', 'You have logged out successfully.');
     }
 }

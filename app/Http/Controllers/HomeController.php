@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB; // Add this import if not already present
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
@@ -71,7 +72,13 @@ class HomeController extends Controller
         ->where('product_id', $product->id)
         ->where('rating', 1)
         ->count();
+        $is_purchased_count = DB::table('orders')
+        ->where('product_id', $product->id)
+        ->where('customer_id', Auth::id())
+        ->count();
         
+        $is_purchased= $is_purchased_count>0?true:false;
+
         return view('shop/single-product-fullwidth',[
                                                         'product'=>$product,
                                                         'product_gallery_image_controllers' => $product_gallery_image_controllers,
@@ -82,7 +89,8 @@ class HomeController extends Controller
                                                         'rating4'=>$rating4,
                                                         'rating3'=>$rating3,
                                                         'rating2'=>$rating2,
-                                                        'rating1'=>$rating1
+                                                        'rating1'=>$rating1,
+                                                        'is_purchased'=>$is_purchased
                                                     ]); //shop.blade.php
     }
 }
