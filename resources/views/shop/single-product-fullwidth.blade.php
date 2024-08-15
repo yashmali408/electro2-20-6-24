@@ -38,11 +38,9 @@ div.zoomContainer{
                         data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4"
                         data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4"
                         data-nav-for="#sliderSyncingThumb">
-                        @foreach($product_gallery_image_controllers as $product_gallery_image_controller)
                         <a href="#" class="js-slide gallery-viewer">
-                            <img id="zoom_10" class="img-fluid "src="{{$product_gallery_image_controller->image_url}}"  alt="Image Description" data-zoom-image="{{$product_gallery_image_controller->image_url}}">
+                            <img id="zoom_10" class="img-fluid" src="/assets/img/720X660/img1.jpg" alt="Image Description">
                         </a>
-                        @endforeach
                     </div>
                     
 
@@ -53,7 +51,7 @@ div.zoomContainer{
                         data-nav-for="#sliderSyncingNav">
                         @foreach($product_gallery_image_controllers as $product_gallery_image_controller)
                         <div class="js-slide" style="cursor: pointer;">
-                            <img class="img-fluid" width="100" src="{{$product_gallery_image_controller->image_url}}" alt="Image Description">
+                            <img class="img-fluid" src="{{$product_gallery_image_controller->image_url}}" alt="Image Description">
                         </div>
                         @endforeach()
                     </div>
@@ -520,45 +518,66 @@ div.zoomContainer{
                                 </ul>
                                 <!-- End Ratings -->
                             </div>
-                            <div class="col-md-6">
-                                <h3 class="font-size-18 mb-5">Add a review</h3>
-                                <!-- Form -->
-                                <form class="js-validate">
-                                    <div class="row align-items-center mb-4">
-                                        <div class="col-md-4 col-lg-3">
-                                            <label for="rating" class="form-label mb-0">Your Review</label>
-                                        </div>
-                                        <div class="col-md-8 col-lg-9">
-                                            <a href="#" class="d-block">
-                                                <div class="text-warning text-ls-n2 font-size-16">
-                                                    <small class="far fa-star"></small>
-                                                    <small class="far fa-star"></small>
-                                                    <small class="far fa-star"></small>
-                                                    <small class="far fa-star"></small>
-                                                    <small class="far fa-star"></small>
+                            @php
+                                if(session('firstname') && $is_purchased==true && $had_given_review_previously===false){
+                                    @endphp
+                                    <div class="col-md-6">
+                                        <h3 class="font-size-18 mb-5">Add a review</h3>
+                                        <!-- Form -->
+                                        <form class="js-validate" method="POST" action="{{route('review.store')}}">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{$product->id}}" />
+                                            <div class="row align-items-center mb-4">
+                                                <div class="col-md-4 col-lg-3">
+                                                    <label for="rating" class="form-label mb-0">Your Review</label>
                                                 </div>
-                                            </a>
-                                        </div>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <a href="#" class="d-block">
+                                                        <div class="text-warning text-ls-n2 font-size-16">
+                                                            <small class="far fa-star" data-value="1"></small>
+                                                            <small class="far fa-star" data-value="2"></small>
+                                                            <small class="far fa-star" data-value="3"></small>
+                                                            <small class="far fa-star" data-value="4"></small>
+                                                            <small class="far fa-star" data-value="5"></small>
+                                                            <input type="hidden" name="rating" value="5" />
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="js-form-message form-group mb-3 row">
+                                                <div class="col-md-4 col-lg-3">
+                                                    <label for="descriptionTextarea" class="form-label">Your Review</label>
+                                                </div>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <textarea name="reviewContent" class="form-control" rows="3" id="descriptionTextarea"
+                                                    data-msg="Please enter your message."
+                                                    data-error-class="u-has-error"
+                                                    data-success-class="u-has-success"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="offset-md-4 offset-lg-3 col-auto">
+                                                    <button type="submit" class="btn btn-primary-dark btn-wide transition-3d-hover">Add Review</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- End Form -->
                                     </div>
-                                    <div class="js-form-message form-group mb-3 row">
-                                        <div class="col-md-4 col-lg-3">
-                                            <label for="descriptionTextarea" class="form-label">Your Review</label>
-                                        </div>
-                                        <div class="col-md-8 col-lg-9">
-                                            <textarea class="form-control" rows="3" id="descriptionTextarea"
-                                            data-msg="Please enter your message."
-                                            data-error-class="u-has-error"
-                                            data-success-class="u-has-success"></textarea>
-                                        </div>
+                                    @php
+                                }else{
+                                    @endphp
+                                    <div class="col-md-6">
+                                        @php
+                                        if(!session('firstname')){
+                                            echo '<h3 class="font-size-18 mb-5 text-danger">You must be logged in</h3>';
+                                        }
+                                        @endphp
+                                        <h3 class="font-size-18 mb-5 text-danger" >You must purchase this product to give review</h3>  
+                                        <h3 class="font-size-18 mb-5 text-danger" >Must not had given review previously</h3>  
                                     </div>
-                                    <div class="row">
-                                        <div class="offset-md-4 offset-lg-3 col-auto">
-                                            <button type="submit" class="btn btn-primary-dark btn-wide transition-3d-hover">Add Review</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <!-- End Form -->
-                            </div>
+                                    @php
+                                }
+                            @endphp
                         </div>
 
                         <!-- Review -->

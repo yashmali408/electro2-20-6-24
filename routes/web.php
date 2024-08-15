@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -13,6 +12,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\SystemInfoController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\WishlistController;
 
 
 use App\Http\Middleware\AdminAuth;
@@ -28,13 +29,13 @@ Route::post('/login',[AuthController::class,'login'])->name('login');
 
 
 Route::prefix('/shop')->group(function () {
+    
+
     Route::get('/shop-grid',[ProductFilterController::class,'filter'])->name('shop-grid');;
     Route::get('/shop',function(){
         return view('shop/shop'); //shop.blade.php
     });
-    Route::get('/wishlist',function(){
-        return view('shop/wishlist'); //shop.blade.php
-    });
+    Route::resource('wishlist', WishlistController::class);
 
     Route::get('/single-product-fullwidth',function(){
         return view('shop/single-product-fullwidth'); //shop.blade.php
@@ -112,4 +113,7 @@ Route::prefix('customer')->group(function () { // /admin/login
     Route::post('/register', [CustomerAuthController::class,'register'])->name('customerRegister');
     Route::post('/login', [CustomerAuthController::class,'login'])->name('customerLogin');
     Route::get('/logout', [CustomerAuthController::class,'logout']);
+
+    // /shop/review
+    Route::resource('review', ReviewController::class);
 });

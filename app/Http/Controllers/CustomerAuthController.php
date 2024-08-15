@@ -56,6 +56,7 @@ class CustomerAuthController extends Controller
 
     // public function method(Formal Argument)
     public function login(Request $request){
+        //dd('OKOKOKOk');
         //dd($request->all());
         /* $request->validate([
             'email'=>'required|email:users',
@@ -69,6 +70,7 @@ class CustomerAuthController extends Controller
             if (Auth::attempt($credentials)) {
                 session(['firstname' => $user->name]);//Associative array ['key'=>'value']
                 session(['lastname' => $user->surname]);
+                //
                 return back()->with('success','You have Logged in successfully.');
             }else{
                 return back()->with('failed','Invalid Credentials.');
@@ -83,10 +85,10 @@ class CustomerAuthController extends Controller
         Auth::logout();
 
         // Clear all session data if needed
-        // $request->session()->invalidate();
+        $request->session()->invalidate();
 
         // Regenerate session token to prevent session fixation
-        // $request->session()->regenerateToken();
+        $request->session()->regenerateToken();
 
         // Redirect to the login page with a success message
         return redirect('/')->with('success', 'You have logged out successfully.');

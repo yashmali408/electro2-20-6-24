@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
 use Illuminate\Database\Eloquent\Model;
 
-class Review extends Model
+class Wishlist extends Model
 {
     use HasFactory;
-    protected $fillable = ['product_id','customer_id','rating','reviewContent'];
+    protected $fillable = [
+        'customer_id',
+        'product_id'
+    ];
 }

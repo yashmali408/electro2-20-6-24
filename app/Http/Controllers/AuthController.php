@@ -36,6 +36,7 @@ class AuthController extends Controller
     }
     //We can give any name of the class object
     public function login(Request $request){
+
         //Serverside validation
         //1. Validate our incomming data
         $request->validate([
@@ -55,6 +56,7 @@ class AuthController extends Controller
             if (Auth::attempt($credentials)) {
                 session(['firstname' => $user->name]);//Associative array ['key'=>'value']
                 session(['lastname' => $user->surname]);
+                
                 return redirect('/admin/dashboard');
             }else{
                 //False

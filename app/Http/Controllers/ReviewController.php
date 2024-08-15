@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
+
 class ReviewController extends Controller
 {
     /**
@@ -29,6 +30,11 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         //
+         //$review = new Review();
+         $data = $request->only('product_id','rating','reviewContent');
+         $data['customer_id']=Auth::id();
+         Review::create($data);
+         return back()->with('success','Product Review posted successfully!');
     }
 
     /**
