@@ -4,7 +4,8 @@
     <head>
         <meta http-equiv="content-type" content="text/html;charset=utf-8" />
         <!-- Title -->
-        <title>{{$appData['app_description']}}</title>
+        
+        <title>{{ isset($appData['app_description']) ? $appData['app_description'] : 'Default Title' }}</title>
 
         <!-- Required Meta Tags Always Come First -->
         <meta charset="utf-8">
@@ -13,7 +14,7 @@
         <link href="https://cdn.usebootstrap.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
         <!-- Favicon -->
         <!-- <link rel="icon" href="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/logo_lite-cbb357.png" type="image/png"> -->
-        <link rel="shortcut icon" href="{{$appData['app_shortcut_icon_url']}}" />
+        <link rel="shortcut icon" href="{{ isset($appData['app_shortcut_icon_url']) ? $appData['app_shortcut_icon_url'] : '/default/icon/path.png' }}" />
         
         <!-- Google Fonts -->
         <link

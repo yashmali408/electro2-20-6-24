@@ -34,6 +34,26 @@ class AuthController extends Controller
                                       ]);
 
     }
+
+    public function cc_dashboard(){
+        //Brands
+                            //Class::method()
+        $brands = \App\Models\Brand::all();
+        //dd( );1
+        //Categories
+        $categories = \App\Models\Category::all();
+        //Units
+        $units = \App\Models\Unit::all();
+        //Products
+        $products = \App\Models\Product::all();
+        return view('customercare.dashboard',[
+                                        'categories'=>count($categories),
+                                        'brands'=>count($brands),
+                                        'units'=>count($units),
+                                        'products'=>count($products),
+                                      ]);
+
+    }
     //We can give any name of the class object
     public function login(Request $request){
 
@@ -56,8 +76,11 @@ class AuthController extends Controller
             if (Auth::attempt($credentials)) {
                 session(['firstname' => $user->name]);//Associative array ['key'=>'value']
                 session(['lastname' => $user->surname]);
+                session(['role' => $user->role]);
+
+                //$user->role
                 
-                return redirect('/admin/dashboard');
+                return redirect('/'.$user->role.'/dashboard');
             }else{
                 //False
                 //Empty Invalid credentials
@@ -97,7 +120,7 @@ class AuthController extends Controller
         //Session detroy
         $request->session()->flush();
         //Everyt function return something
-        return redirect('/admin');
+        return redirect('/admin/login');
     }
 
 

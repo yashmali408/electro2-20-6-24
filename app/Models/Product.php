@@ -2,22 +2,30 @@
 
 namespace App\Models;
 
-use App\Models\Brand;
-use App\Models\Category;
-use App\Models\Unit;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Brand;
+use App\Models\Unit;
+use App\Models\Category;
+
 class Product extends Model
 {
-    //1. Property
     use HasFactory;
-    protected $fillable = ['product_name','product_desc','unit_id','brand_id','category_id','mrp','sell_price','qty_available','prod_thumbnail_img','prod_main_img'];
-
-    //2. Constructor
-
-
+    //1. Property
+    protected $fillable = [
+        'product_name',
+        'product_desc',
+        'unit_id',
+        'brand_id',
+        'category_id',
+        'mrp',
+        'sell_price',
+        'qty_available',
+        'prod_thumbnail_img',
+        'prod_main_img'
+    ];
+    
     //3. Method
     // Define the relationship to Brand
     public function brand()
@@ -36,4 +44,5 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
 }

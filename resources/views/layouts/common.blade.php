@@ -7,7 +7,7 @@
         <!-- Required Meta Tags Always Come First -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="csrf-token" content="{{ csrf_token() }}">    
+
         <!-- Favicon -->
         <link rel="shortcut icon" href="/favicon.png">
 
@@ -30,27 +30,108 @@
         <link rel="stylesheet" href="/assets/vendor/slick-carousel/slick/slick.css">
         <link rel="stylesheet" href="/assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
         <link rel="stylesheet" href="/assets/css/theme.css">
+        <style>
+            .zoomContainer {
+                position: relative;
+                z-index: 1000 !important;
+            }
+            /* Container for breadcrumbs */
+            .breadcrumbs {
+                display: flex; /* Use flexbox for horizontal layout */
+                align-items: center; /* Center items vertically */
+                gap: 1rem; /* Space between breadcrumb items */
+                flex-wrap: wrap; /* Allow wrapping if necessary */
+            }
+
+            /* Individual breadcrumb item styling */
+            .breadcrumb-item {
+                display: flex; /* Flexbox for item content */
+                align-items: center; /* Center items vertically */
+                
+            }
+            /* Vertical layout for single value items */
+            .vertical-layout {
+                display: flex;
+                flex-direction: column; /* Arrange items vertically */
+                gap: 0.5rem; /* Space between items */
+            }
+
+            /* Single value item styling */
+            .single-value-item {
+                display: flex; /* Flexbox for item content */
+                align-items: center; /* Center items vertically */
+            }
+            /* Adjust font size and spacing */
+            .font-size-14 {
+                font-size: 14px; /* Adjust font size as needed */
+            }
+
+            /* Margin-left for select and span */
+            .ml-3 {
+                margin-left: 0.75rem; /* Adjust margin as needed */
+            }
+
+            /* Optional: Style for breadcrumb links (if you use links) */
+            .breadcrumb-item a {
+                text-decoration: none; /* Remove underline from links */
+                color: inherit; /* Inherit text color from parent */
+            }
+            .font-weight-bold {
+                font-weight: bold; /* Make text bold */
+            }
+            .breadcrumb-item span {
+                display: inline-block;
+                margin-left: 0.5rem; /* Space between key and value */
+            }
+            .model{
+                position: absolute;
+                z-index:2000
+            }
+            
+        </style>
     </head>
 
     <body>
+        
         <!-- Modal -->
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade model" id="wishlistModal" tabindex="-1" aria-labelledby="wishlistModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5 text-center" id="loginModalLabel">Modal title</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="wishlistModalLabel">Login Required</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
-                        
+                        <!-- Login Form -->
+                        <form id="loginForm" method="POST" action="{{ route('login') }}">
+                            @csrf
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email Here" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your Password " required>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                                <label class="form-check-label" for="remember">Remember me</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </form>
+                        <hr>
+                        <a href="#">Forgot your password?</a>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
-        </div>    
+        </div>
+
+
         @include('layouts.header')
 
         @yield('common_content')
@@ -701,7 +782,7 @@
             <span class="fas fa-arrow-up u-go-to__inner"></span>
         </a>
         <!-- End Go to Top -->
-        
+
         <!-- JS Global Compulsory -->
         <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
         <script src="/assets/js/zoom/jquery-ui.min.js"></script>
@@ -710,6 +791,7 @@
         <script src="/assets/js/zoom/panZoom.js"></script>
         <script src="/assets/js/zoom/ui-carousel.js"></script>
         <script src="/assets/js/zoom/zoom.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script src="/assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
         <script src="/assets/vendor/popper.js/dist/umd/popper.min.js"></script>
@@ -784,7 +866,7 @@
                 $.HSCore.components.HSQantityCounter.init('.js-quantity');
 
                 // initialization of popups
-                //$.HSCore.components.HSFancyBox.init('.js-fancybox');
+                $.HSCore.components.HSFancyBox.init('.js-fancybox');
 
                 // initialization of countdowns
                 var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
@@ -818,7 +900,7 @@
                 $.HSCore.components.HSShowAnimation.init('.js-animation-link');
 
                 // initialization of fancybox
-                //$.HSCore.components.HSFancyBox.init('.js-fancybox');
+                $.HSCore.components.HSFancyBox.init('.js-fancybox');
 
                 // initialization of slick carousel
                 $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
@@ -838,7 +920,6 @@
                         $('#headerSidebarList .collapse.show').collapse('hide');
                     }
                 });
-
                 $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
                     e.preventDefault();
 
@@ -850,7 +931,6 @@
                         $(target).collapse('show');
                     }
                 });
-
                 // initialization of unfold component
                 $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
 
@@ -858,53 +938,189 @@
                 $.HSCore.components.HSSelectPicker.init('.js-select');
             });
         </script>
+        
         <script>
-           /*  document
-            .querySelector('small.far.fa-star')
-            .addEventListener('click', function (e) {
-                e.preventDefault();
-                console.log('OKOKOKOKOKOKO');
-            }); */
+            document.addEventListener('DOMContentLoaded', function () {
+                const wishlistButtons = document.querySelectorAll('.wishlist-button');
 
-        </script>
-        <script>
-            document.querySelector('.wishlistButton').addEventListener('click', function (e) {
-                //e.preventDefault(); //Stop reloading the page
-                console.log("Wishlish clicked");
-                //PHP code
-                //I want to execute php code inside javscirpt
-                @if (!auth()->check())
-                    event.preventDefault(); // Prevent form submission
-                    var loginModal = new bootstrap.Modal(document.getElementById('loginModal'), {
-                        keyboard: false
+                wishlistButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        const productId = this.getAttribute('data-product-id');
+                        const form = document.getElementById(`wishlist-form-${productId}`);
+                        const icon = this.querySelector('i');
+
+                        $.ajax({
+                            type: "POST",
+                            url: form.action,
+                            data: $(form).serialize(), // Serialize form data
+                            success: function(response) {
+                                if (response.status === 'success') {
+                                    // Toggle between the outlined and filled heart icon
+                                    if (icon.classList.contains('far')) {
+                                        icon.classList.remove('far', 'fa-heart'); // Remove outlined version
+                                        icon.classList.add('fas', 'fa-heart');   // Add filled version
+                                    }
+
+                                    // Show the success message
+                                    Swal.fire({
+                                        toast: true,
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: response.message,
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        timerProgressBar: true,
+                                        customClass: {
+                                            popup: 'colored-toast'
+                                        },
+                                        didOpen: (toast) => {
+                                            toast.addEventListener('mouseenter', Swal.stopTimer);
+                                            toast.addEventListener('mouseleave', Swal.resumeTimer);
+                                        }
+                                    });
+                                } else if (response.status === 'exists') {
+                                    // Show the informational message
+                                    Swal.fire({
+                                        toast: true,
+                                        position: 'top-end',
+                                        icon: 'error',
+                                        title: response.message,
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        timerProgressBar: true,
+                                        customClass: {
+                                            popup: 'colored-toast'
+                                        },
+                                        didOpen: (toast) => {
+                                            toast.addEventListener('mouseenter', Swal.stopTimer);
+                                            toast.addEventListener('mouseleave', Swal.resumeTimer);
+                                        }
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                if (xhr.status === 401) {
+                                    // Trigger the modal if the user is not logged in
+                                    $('#wishlistModal').modal('show');
+                                } else {
+                                    Swal.fire({
+                                        toast: true,
+                                        position: 'top-end',
+                                        icon: 'error',
+                                        title: 'An error occurred',
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        timerProgressBar: true,
+                                    });
+                                }
+                            }
+                        });
                     });
-                    loginModal.show(); // Show the modal
-                    document.querySelector('.modal-title').innerHTML=`Login`;
-                    let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                    let form = `<form method="POST" action="/customer/login">
-                                    <input type="hidden" name="_token" value="${csrfToken}">
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                                        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-                                    </div>
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>`;
-                    document.querySelector('.modal-body').innerHTML= form;
-                   
-                @else
-                    document.querySelector('.wishlistForm').submit(); // Submit the form if logged in
-                @endif
+                });
 
+                // Handle the login form submission inside the modal
+                $('#wishlistModal form').on('submit', function(event) {
+                    event.preventDefault();
+
+                    $.ajax({
+                        type: $(this).attr('method'),
+                        url: $(this).attr('action'),
+                        data: $(this).serialize(),
+                        success: function(response) {
+                            // Handle successful login
+                            location.reload(); // Reload the page or do something else
+                        },
+                        error: function(xhr) {
+                            // Handle login errors (e.g., invalid credentials)
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Login Failed',
+                                text: 'Invalid email or password. Please try again.',
+                            });
+                        }
+                    });
+                });
             });
         </script>
+        <script>
+            document.getElementById('loginForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Simulate a successful login (replace this with your actual login logic)
+                // For example, you might want to use AJAX to submit the form and get a response
+
+                Swal.fire({
+                icon: 'success',
+                title: 'Login Successful!',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+                });
+
+                // If using AJAX, you would handle the response here and show the toast if successful
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.delete-button').forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You want to delete it?",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                this.closest('form').submit();
+                            }
+                        })
+                    });
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('#addToCartForm').on('submit', function(event) {
+                    event.preventDefault(); // Prevent page reload
+
+                    var form = $(this);
+                    var formData = form.serialize(); // Serialize form data
+
+                    $.ajax({
+                        url: form.attr('action'), // Form action URL
+                        type: 'POST',
+                        data: formData,
+                        success: function(response) {
+                            // Handle success response
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Added to Cart!',
+                                text: response.message || 'Product has been added to your cart.',
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        },
+                        error: function(xhr) {
+                            // Handle error response
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Sorry...',
+                                text: xhr.responseJSON.message || 'Something went wrong!',
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    });
+                });
+            });
+        </script> 
     </body>
 </html>

@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="d-flex align-items-center">
                     <div class="topbar-left">
-                        <a href="/" class="text-gray-110 font-size-13 u-header-topbar__nav-link">Welcome to {{$appData['app_name']}}</a>
+                        <a href="/" class="text-gray-110 font-size-13 u-header-topbar__nav-link">Welcome to ['app_name']}}</a>
                     </div>
                     <div class="topbar-right ml-auto">
                         <ul class="list-inline mb-0">
@@ -95,7 +95,7 @@
                         <nav class="navbar navbar-expand u-header__navbar py-0 justify-content-xl-between max-width-270 min-width-270">
                             <!-- Logo -->
                             <a class="order-1 order-xl-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-center" href="/" aria-label="Electro">
-                                <img src="{{$appData['app_logo']}}" />
+                                <img src="['app_logo']}}" />
                             </a>
                             <!-- End Logo -->
 
@@ -627,10 +627,10 @@
                             <i class="ec ec-support font-size-50 text-primary"></i>
                             <div class="ml-2">
                                 <div class="phone">
-                                    <strong>Support</strong> <a href="tel:{{$appData['customer_care_no1']}}" class="text-gray-90">{{$appData['customer_care_no1']}}</a>
+                                    <strong>Support</strong> <a href="tel:['customer_care_no1']}}" class="text-gray-90">['customer_care_no1']}}</a>
                                 </div>
                                 <div class="email">
-                                    E-mail: <a href="mailto:{{$appData['support_email_addr']}}?subject=Help Need" class="text-gray-90">{{$appData['support_email_addr']}}</a>
+                                    E-mail: <a href="mailto:['support_email_addr']}}?subject=Help Need" class="text-gray-90">['support_email_addr']}}</a>
                                 </div>
                             </div>
                         </div>
@@ -678,7 +678,7 @@
                                     <a href="/shop/cart" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
                                         <span class="width-22 height-22 bg-dark position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12 text-white">2</span>
-                                        <span class="d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3">$1785.00</span>
+                                        <span class="d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3">$1000.00</span>
                                     </a>
                                 </li>
                             </ul>
@@ -1097,8 +1097,8 @@
                                 <li class="col pr-0">
                                     <a href="/shop/cart" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                         <i class="font-size-22 ec ec-shopping-bag"></i>
-                                        <span class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12">2</span>
-                                        <span class="font-weight-bold font-size-16 text-gray-90 ml-3">$1785.00</span>
+                                        <span class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12">{{$cart_info['cart_count']}}</span>
+                                        <span class="font-weight-bold font-size-16 text-gray-90 ml-3">{{$cart_info['cart_total']}}</span>
                                     </a>
                                 </li>
                             </ul>

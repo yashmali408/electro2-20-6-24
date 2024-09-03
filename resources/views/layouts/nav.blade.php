@@ -4,7 +4,7 @@
     <!-- Logo -->
     <a class="order-1 order-xl-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-center"
         href="/" aria-label="Electro">
-        <img src="{{$appData['app_logo']}}"/>
+        <img src="{{$appData['app_logo']}}" />
     </a>
     <!-- End Logo -->
 

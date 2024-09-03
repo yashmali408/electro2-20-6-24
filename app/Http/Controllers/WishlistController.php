@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB; // Add this import if not already present
-use Illuminate\Support\Facades\Auth;
-
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class WishlistController extends Controller
 {
@@ -16,30 +15,13 @@ class WishlistController extends Controller
     public function index()
     {
         //
+
         $wishlists = DB::table('wishlists')
         ->join('users', 'users.id', '=', 'wishlists.customer_id')
         ->join('products', 'products.id', '=', 'wishlists.product_id')
         ->where('users.id', Auth::id()) // Correct table name
         ->get();
-        //dd($wishlists);
-
-        /* $wishlists = [
-            'product1'=>[
-                'product_name'=>'Ultra Wireless S50 Headphones S50 with Bluetooth',
-                'unit_price'=>1100,
-                'is_instock'=>false,
-            ],
-            'product2'=>[
-                'product_name'=>'Widescreen NX Mini F1 SMART NX 1',
-                'unit_price'=>685.00,
-                'is_instock'=>true,
-            ],
-            'product3'=>[
-                'product_name'=>'Widescreen NX Mini F1 SMART NX 2',
-                'unit_price'=>685.00,
-                'is_instock'=>false,
-            ],
-        ]; */
+        
         return view('shop/wishlist',['wishlists'=>$wishlists]);
     }
 
@@ -56,16 +38,30 @@ class WishlistController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        //dd($request->all());
-        //dd('store');
-        $data = $request->only('product_id');
-        $data['customer_id']=Auth::id();
-        //dd($data);
-        Wishlist::create($data);
-        return back()->with('success','Product added to wishlist successfully');
+        // Check if the user is authenticated
+        if (!auth()->check()) {
+            return response()->json(['status' => 'not_logged_in'], 401);
+        }
 
+        $data = $request->only('product_id');
+        $data['customer_id'] = Auth::id();
+
+        // Check if the product is already in the wishlist for this user
+        $exists = Wishlist::where('customer_id', $data['customer_id'])
+                        ->where('product_id', $data['product_id'])
+                        ->exists();
+
+        if ($exists) {
+            // Return a response indicating the item is already in the wishlist
+            return response()->json(['status' => 'exists', 'message' => 'Product is already in your wishlist!'], 200);
+        } else {
+            // Create the new wishlist entry
+            Wishlist::create($data);
+            return response()->json(['status' => 'success', 'message' => 'Product added to wishlist successfully!'], 200);
+        }
     }
+
+
 
     /**
      * Display the specified resource.

@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wishlists', function (Blueprint $table) {
-            $table->id();
-            $table->string('customer_id');
-            $table->string('product_id');
-            $table->timestamps();
+        Schema::table('brands', function (Blueprint $table) {
+            $table->string('picture')->nullable();
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wishlists');
+        Schema::table('brands', function (Blueprint $table) {
+            $table->dropColumn('picture');
+        });
     }
 };

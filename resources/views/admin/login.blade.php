@@ -18,7 +18,7 @@
 <div class="login-box"> 
   <div class="login-logo">
   @isset($app_logo)
-  <img width="120" src="{{$appData['app_logo']}}" />
+  <img width="120" src="" />
       @endisset
   </div>
   <!-- /.login-logo -->

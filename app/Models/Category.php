@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Models;
-use App\Models\Product;
-
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
 
 class Category extends Model
 {
@@ -15,8 +14,13 @@ class Category extends Model
         'category_name',
         'description',
         'picture'
-        // Add other attributes that you want to be mass assignable
     ];
+
+    //2.Constructer
+
+
+
+    //3. Method
 
     protected $primaryKey = 'category_id';
 
