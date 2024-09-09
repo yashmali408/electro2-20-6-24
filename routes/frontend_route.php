@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductFilterController;
@@ -19,8 +20,6 @@ use App\Http\Controllers\CheckoutController;
 
 
 use App\Http\Middleware\AdminAuth;
-
-
 
 /*   Frontend Routes     */
 
@@ -89,4 +88,15 @@ Route::get('/contact-v1',function(){
 });
 
 
-?>
+
+
+
+/*   Frontend Routes     */
+Route::prefix('customer')->group(function () { // /admin/login
+    Route::post('/register', [CustomerAuthController::class,'register'])->name('customerRegister');
+    Route::post('/login', [CustomerAuthController::class,'login'])->name('customerLogin');
+    Route::get('/logout', [CustomerAuthController::class,'logout']);
+
+    // /shop/review
+    Route::resource('review', ReviewController::class);
+});

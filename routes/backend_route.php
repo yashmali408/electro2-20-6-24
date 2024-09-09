@@ -1,6 +1,7 @@
+
 <?php
 
-
+use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductFilterController;
@@ -44,21 +45,5 @@ Route::prefix('admin')->middleware(AdminAuth::class)->group(function () { // /ad
         return view('admin.general'); //general.blade.php
     });
 });
-
-Route::prefix('customercare')->middleware(AdminAuth::class)->group(function () { // /admin/login
-    Route::get('/dashboard', [AuthController::class,'cc_dashboard'])->name('customercare_dashboard');
-});
-
-/*   Frontend Routes     */
-Route::prefix('customer')->group(function () { // /admin/login
-    Route::post('/register', [CustomerAuthController::class,'register'])->name('customerRegister');
-    Route::post('/login', [CustomerAuthController::class,'login'])->name('customerLogin');
-    Route::get('/logout', [CustomerAuthController::class,'logout']);
-
-    // /shop/review
-    Route::resource('review', ReviewController::class);
-});
-
-
 
 ?>

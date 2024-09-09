@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="{{route('admin_dashboard')}}" class="brand-link">
         <span class="d-block brand-text font-weight-light text-center">
-            <img width="120" src="#" />
+            <img width="120" src="{{$appData['app_logo']}}" />
         </span>
     </a>
 
@@ -16,6 +16,9 @@
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{ session('firstname') }} {{ session('lastname') }}</a>
+            </div>
+            <div class="info text-white">
+                ({{ session('role') }})
             </div>
         </div>
 
@@ -85,6 +88,15 @@
                             </ul>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="/customercare/chat" class="nav-link active">
+                        <i class="nav-icon far fa-message"></i>
+                        <p>
+                        Chat
+                        <span class="badge badge-info right">2</span>
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>
