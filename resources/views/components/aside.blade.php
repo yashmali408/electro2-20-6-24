@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="{{route('admin_dashboard')}}" class="brand-link">
         <span class="d-block brand-text font-weight-light text-center">
-            <img width="120" src="{{$appData['app_logo']}}" />
+            <img width="120" src="" />
         </span>
     </a>
 
